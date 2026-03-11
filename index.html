@@ -49,28 +49,55 @@
             background-color: #0F1117;
             color: #F5F5F5;
             font-family: 'Inter', sans-serif;
+            background-image: radial-gradient(circle at 20% 20%, rgba(83, 131, 232, 0.05) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 80%, rgba(232, 64, 94, 0.03) 0%, transparent 50%);
         }
         .glass-effect {
-            background: rgba(26, 29, 39, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(26, 29, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
         }
         .text-gradient {
-            background: linear-gradient(to right, #F5F5F5, #5383E8);
+            background: linear-gradient(135deg, #FFFFFF 0%, #5383E8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .hover-lift {
-            transition: transform 0.2s ease-out;
+        .win-gradient {
+            background: linear-gradient(90deg, rgba(40, 167, 69, 0.1) 0%, transparent 100%);
+            border-left: 4px solid #28A745;
         }
-        .hover-lift:hover {
-            transform: translateY(-4px);
+        .loss-gradient {
+            background: linear-gradient(90deg, rgba(232, 64, 94, 0.1) 0%, transparent 100%);
+            border-left: 4px solid #E8405E;
+        }
+        .champion-card:hover .champion-stats {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .champion-stats {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0F1117;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1A1D27;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5383E8;
         }
         /* Reveal animation */
         .reveal {
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
         }
         .reveal.active {
             opacity: 1;
@@ -80,227 +107,480 @@
 </head>
 <body class="selection:bg-accent/30 selection:text-white overflow-x-hidden">
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass-effect">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="font-mono font-bold text-xl tracking-tighter">
-                <span class="text-accent">TOP</span>LANE<span class="text-accent"> /&gt;</span>
+    <nav class="fixed top-0 w-full z-50 border-b border-white/5 bg-primary/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="font-mono font-black text-lg tracking-tighter bg-accent px-2 py-0.5 rounded italic">
+                    TOPLANE
+                </div>
+                <div class="h-4 w-[1px] bg-white/10"></div>
+                <div class="text-xs font-mono text-textMuted tracking-widest uppercase hidden sm:block">
+                    Ranked Dominance Dashboard
+                </div>
             </div>
-            <div class="hidden md:flex space-x-8 text-sm font-medium text-textMuted">
-                <a href="#expertise" class="hover:text-textMain transition-colors">英雄池</a>
-                <a href="#philosophy" class="hover:text-textMain transition-colors">对线哲学</a>
-                <a href="#projects" class="hover:text-textMain transition-colors">战绩回顾</a>
-                <a href="#services" class="hover:text-textMain transition-colors">教学预约</a>
-                <a href="#contact" class="hover:text-textMain transition-colors text-accent border-l border-white/10 pl-8">双排申请</a>
+            <div class="hidden md:flex space-x-10 text-[11px] font-bold uppercase tracking-widest text-textMuted">
+                <a href="#expertise" class="hover:text-accent transition-colors">Champion Pool</a>
+                <a href="#philosophy" class="hover:text-accent transition-colors">Tactics</a>
+                <a href="#projects" class="hover:text-accent transition-colors">Match History</a>
+                <a href="#services" class="hover:text-accent transition-colors">Academy</a>
+                <a href="#contact" class="px-4 py-1 border border-accent/50 text-accent rounded hover:bg-accent hover:text-white transition-all">Duo Queue</a>
             </div>
-            <!-- Mobile Menu Placeholder -->
             <div class="md:hidden">
-                <i data-lucide="menu" class="w-6 h-6"></i>
+                <i data-lucide="menu" class="w-5 h-5"></i>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="min-h-screen flex flex-col justify-center pt-20 px-6 max-w-6xl mx-auto relative">
-        <div class="absolute top-1/4 right-0 w-96 h-96 bg-accent/5 blur-[160px] rounded-full -z-10 animate-pulse"></div>
-        <div class="space-y-8">
-            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-mono">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-                </span>
-                <span>当前排位状态：最强王者 (Challenger) 近期胜率 68%</span>
-            </div>
-            <h1 class="text-6xl md:text-8xl font-bold tracking-tight text-gradient leading-[1.1]">
-                不仅是玩游戏，<br>
-                更是主宰 <span class="text-accent italic">上路禁区</span>。
-            </h1>
-            <p class="text-xl md:text-2xl text-textMuted max-w-3xl leading-relaxed font-light">
-                我是 <span class="text-textMain font-medium">刘小又</span>，一名英雄联盟上单专项玩家。精通战士、坦克与分推体系。在兵线博弈与 TP 支援中寻找胜利的平衡点。
-            </p>
-            <div class="flex flex-wrap gap-4 pt-6">
-                <a href="#projects" class="px-10 py-5 bg-accent text-white rounded-xl font-bold hover:bg-accent/90 transition-all hover-lift flex items-center space-x-3 shadow-lg shadow-accent/20">
-                    <span>查看排位数据记录</span>
-                    <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
-                </a>
-                <a href="#philosophy" class="px-10 py-5 bg-secondary text-textMain border border-white/10 rounded-xl font-bold hover:bg-white/5 transition-all hover-lift">
-                    探索我的对线思路
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="py-24 px-6 max-w-6xl mx-auto border-y border-white/5 reveal">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center md:text-left">
-            <div class="space-y-2 group">
-                <div class="text-4xl font-bold font-mono text-accent group-hover:scale-110 transition-transform origin-left">S14</div>
-                <div class="text-xs text-textMuted uppercase tracking-[0.2em]">CURRENT SEASON</div>
-                <p class="text-[10px] text-textMuted/60">当前赛季排位等级：王者 800 点</p>
-            </div>
-            <div class="space-y-2 group">
-                <div class="text-4xl font-bold font-mono text-accent group-hover:scale-110 transition-transform origin-left">3.8</div>
-                <div class="text-xs text-textMuted uppercase tracking-[0.2em]">KDA RATIO</div>
-                <p class="text-[10px] text-textMuted/60">参团率 65%，对位领先 2500 金币</p>
-            </div>
-            <div class="space-y-2 group">
-                <div class="text-4xl font-bold font-mono text-accent group-hover:scale-110 transition-transform origin-left">68%</div>
-                <div class="text-xs text-textMuted uppercase tracking-[0.2em]">WIN RATE</div>
-                <p class="text-[10px] text-textMuted/60">上单战士英雄池综合胜率表现</p>
-            </div>
-            <div class="space-y-2 group">
-                <div class="text-4xl font-bold font-mono text-accent group-hover:scale-110 transition-transform origin-left">Top 1%</div>
-                <div class="text-xs text-textMuted uppercase tracking-[0.2em]">PLAYER RANK</div>
-                <p class="text-[10px] text-textMuted/60">国服第一梯队，多个英雄省港服前 10</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Expertise Section -->
-    <section id="expertise" class="py-32 px-6 max-w-6xl mx-auto reveal">
-        <div class="flex flex-col md:flex-row gap-16 mb-20">
-            <div class="md:w-1/3">
-                <div class="sticky top-24">
-                    <h2 class="text-4xl font-bold mb-6">全能英雄池与<br>对位克制</h2>
-                    <p class="text-textMuted leading-relaxed mb-8">
-                        我不只是“会玩”，我追求的是对每一个英雄机制的极限开发。根据阵容选择最合适的上单策略，是赢下比赛的第一步。
+    <section class="min-h-screen flex items-center pt-20 px-6 max-w-7xl mx-auto relative overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+            <div class="space-y-10 z-10">
+                <div class="inline-flex items-center space-x-3 px-4 py-1.5 rounded-lg bg-accent/5 border border-accent/20">
+                    <div class="w-2 h-2 rounded-full bg-accent animate-ping"></div>
+                    <span class="text-[10px] font-mono font-bold text-accent uppercase tracking-tighter">Live Status: Solo/Duo Ranked (Challenger 852 LP)</span>
+                </div>
+                <div class="space-y-4">
+                    <h1 class="text-7xl md:text-9xl font-black tracking-tighter text-gradient leading-none">
+                        BEYOND <br> THE <span class="italic text-accent">LANE.</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-textMuted max-w-xl leading-relaxed font-medium">
+                        我是 <span class="text-textMain underline decoration-accent decoration-2 underline-offset-4">刘小又</span>。不只是上单，更是对手的梦魇。精通兵线压制、对位单杀与绝境翻盘。在这里，数据不仅是数字，更是统治力的证明。
                     </p>
-                    <div class="flex flex-col gap-4">
-                        <div class="flex items-center space-x-3 text-sm text-textMain font-mono">
-                            <i data-lucide="sword" class="w-4 h-4 text-accent"></i>
-                            <span>战士型：极致拉扯与斩杀 (剑姬/青钢影)</span>
+                </div>
+                <div class="flex flex-wrap gap-6 pt-4">
+                    <a href="#projects" class="px-10 py-5 bg-accent text-white rounded-sm font-black uppercase tracking-widest hover:bg-accent/80 transition-all hover-lift shadow-[0_0_40px_rgba(83,131,232,0.3)]">
+                        Match Records
+                    </a>
+                    <a href="#expertise" class="px-10 py-5 bg-white/5 text-white border border-white/10 rounded-sm font-black uppercase tracking-widest hover:bg-white/10 transition-all">
+                        Champion Pool
+                    </a>
+                </div>
+            </div>
+            <div class="relative hidden lg:block">
+                <div class="aspect-square glass-effect rounded-[5rem] p-12 relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    <div class="relative z-10 h-full flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <div class="text-xs font-mono text-accent mb-1 uppercase tracking-widest">Global Rank</div>
+                                <div class="text-5xl font-black italic">#142</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs font-mono text-textMuted mb-1 uppercase tracking-widest">Server</div>
+                                <div class="text-xl font-bold">China / Ionia</div>
+                            </div>
                         </div>
-                        <div class="flex items-center space-x-3 text-sm text-textMain font-mono">
-                            <i data-lucide="shield" class="w-4 h-4 text-accent"></i>
-                            <span>坦克型：坚实的前排与控制 (奥恩/奎桑提)</span>
+                        <div class="space-y-6">
+                            <div class="flex justify-between items-end border-b border-white/10 pb-4">
+                                <span class="text-xs text-textMuted uppercase font-bold tracking-widest">Main Champions</span>
+                                <div class="flex -space-x-3">
+                                    <div class="w-12 h-12 rounded-full border-2 border-primary bg-secondary flex items-center justify-center font-bold text-xs">F</div>
+                                    <div class="w-12 h-12 rounded-full border-2 border-primary bg-secondary flex items-center justify-center font-bold text-xs">C</div>
+                                    <div class="w-12 h-12 rounded-full border-2 border-primary bg-secondary flex items-center justify-center font-bold text-xs">O</div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-4">
+                                <div class="text-center">
+                                    <div class="text-xl font-black text-win">68.4%</div>
+                                    <div class="text-[10px] text-textMuted uppercase tracking-widest font-bold">Win Rate</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-xl font-black">3.82</div>
+                                    <div class="text-[10px] text-textMuted uppercase tracking-widest font-bold">KDA Avg</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-xl font-black text-accent">9.4</div>
+                                    <div class="text-[10px] text-textMuted uppercase tracking-widest font-bold">CS/Min</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="flex items-center space-x-3 text-sm text-textMain font-mono">
-                            <i data-lucide="zap" class="w-4 h-4 text-accent"></i>
-                            <span>单带型：兵线压力与后期无敌 (武器/纳尔)</span>
+                    </div>
+                </div>
+                <div class="absolute -bottom-10 -right-10 w-48 h-48 bg-accent/30 blur-[100px] -z-10"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise / Champion Pool -->
+    <section id="expertise" class="py-32 px-6 max-w-7xl mx-auto reveal">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+            <div class="space-y-4">
+                <h2 class="text-4xl font-black tracking-tighter uppercase italic">The Champion <span class="text-accent">Pool</span></h2>
+                <p class="text-textMuted max-w-xl text-sm leading-relaxed">
+                    不仅是操作者，更是机制的解构者。根据对位情况（Counter-Pick）选择最优解，从选人阶段就开始统治比赛。
+                </p>
+            </div>
+            <div class="flex gap-4">
+                <button class="px-6 py-2 bg-accent text-[10px] font-black uppercase tracking-widest rounded-sm">All</button>
+                <button class="px-6 py-2 bg-white/5 text-[10px] font-black uppercase tracking-widest rounded-sm hover:bg-white/10">Fighters</button>
+                <button class="px-6 py-2 bg-white/5 text-[10px] font-black uppercase tracking-widest rounded-sm hover:bg-white/10">Tanks</button>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Champion 1: Fiora -->
+            <div class="champion-card p-10 glass-effect border border-white/5 group relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-accent/5 -rotate-45 translate-x-16 -translate-y-16"></div>
+                <div class="relative z-10 space-y-8">
+                    <div class="flex justify-between items-center">
+                        <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
+                            <i data-lucide="sword" class="w-8 h-8"></i>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-[10px] text-textMuted font-bold uppercase tracking-widest">Win Rate</div>
+                            <div class="text-2xl font-black text-win">72%</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-black uppercase tracking-tighter mb-2">Fiora <span class="text-xs font-mono font-normal text-textMuted ml-2">无双剑姬</span></h3>
+                        <p class="text-xs text-textMuted leading-relaxed">
+                            极致的对线压制力与单带统治力。精通“一秒四破”与 W 技能的各种神级格挡，能在 1v2 甚至 1v3 中反杀。
+                        </p>
+                    </div>
+                    <div class="champion-stats flex justify-between pt-6 border-t border-white/5">
+                        <div class="text-center">
+                            <div class="text-sm font-black">152</div>
+                            <div class="text-[9px] text-textMuted uppercase font-bold tracking-tighter">Played</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-sm font-black">4.1</div>
+                            <div class="text-[9px] text-textMuted uppercase font-bold tracking-tighter">KDA</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-sm font-black">Tier 1</div>
+                            <div class="text-[9px] text-textMuted uppercase font-bold tracking-tighter">Mastery</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Expertise Card 1 -->
-                <div class="p-8 rounded-3xl glass-effect space-y-6 hover-lift border border-white/5 group hover:border-accent/30 transition-all">
-                    <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all">
-                        <i data-lucide="swords" class="w-7 h-7"></i>
+
+            <!-- Champion 2: Camille -->
+            <div class="champion-card p-10 glass-effect border border-white/5 group relative overflow-hidden">
+                <div class="relative z-10 space-y-8">
+                    <div class="flex justify-between items-center">
+                        <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
+                            <i data-lucide="zap" class="w-8 h-8"></i>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-[10px] text-textMuted font-bold uppercase tracking-widest">Win Rate</div>
+                            <div class="text-2xl font-black text-win">65%</div>
+                        </div>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold mb-3">极致微操 (Micro)</h3>
-                        <p class="text-sm text-textMuted leading-relaxed">
-                            精通剑姬一秒四破、青钢影 E 闪、武器大师跳斩距离把控。能在对线期通过细微的走位骗出对方关键技能并反杀。
+                        <h3 class="text-2xl font-black uppercase tracking-tighter mb-2">Camille <span class="text-xs font-mono font-normal text-textMuted ml-2">青钢影</span></h3>
+                        <p class="text-xs text-textMuted leading-relaxed">
+                            全图支援与定点秒杀专家。掌握 E 闪各种角度与二段 Q 的精准爆发。是配合打野越塔与中后期抓单的最优选择。
                         </p>
                     </div>
-                    <div class="flex flex-wrap gap-2 pt-2">
-                        <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-mono text-textMuted">Fiora Main</span>
-                        <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-mono text-textMuted">Camille OTP</span>
-                        <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-mono text-textMuted">Jax King</span>
+                    <div class="champion-stats flex justify-between pt-6 border-t border-white/5">
+                        <div class="text-center">
+                            <div class="text-sm font-black">210</div>
+                            <div class="text-[9px] text-textMuted uppercase font-bold tracking-tighter">Played</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-sm font-black">3.6</div>
+                            <div class="text-[9px] text-textMuted uppercase font-bold tracking-tighter">KDA</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-sm font-black">Tier S</div>
+                            <div class="text-[9px] text-textMuted uppercase font-bold tracking-tighter">Mastery</div>
+                        </div>
                     </div>
                 </div>
-                <!-- Expertise Card 2 -->
-                <div class="p-8 rounded-3xl glass-effect space-y-6 hover-lift border border-white/5 group hover:border-accent/30 transition-all">
-                    <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all">
-                        <i data-lucide="map" class="w-7 h-7"></i>
+            </div>
+
+            <!-- Champion 3: Ornn -->
+            <div class="champion-card p-10 glass-effect border border-white/5 group relative overflow-hidden">
+                <div class="relative z-10 space-y-8">
+                    <div class="flex justify-between items-center">
+                        <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
+                            <i data-lucide="shield" class="w-8 h-8"></i>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-[10px] text-textMuted font-bold uppercase tracking-widest">Win Rate</div>
+                            <div class="text-2xl font-black text-win">62%</div>
+                        </div>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold mb-3">兵线与大局观 (Macro)</h3>
-                        <p class="text-sm text-textMuted leading-relaxed">
-                            精准计算兵线回推时间。掌握完美的 TP 支援时机，不漏经验的同时帮助下路建立优势。知道什么时候该推塔，什么时候该参团。
+                        <h3 class="text-2xl font-black uppercase tracking-tighter mb-2">Ornn <span class="text-xs font-mono font-normal text-textMuted ml-2">山隐之焰</span></h3>
+                        <p class="text-xs text-textMuted leading-relaxed">
+                            团队的基石。在抗压对线中寻求经济领先，通过打铁升级装备为团队提供后期保障。完美的开团与反手控制。
                         </p>
                     </div>
-                    <div class="flex flex-wrap gap-2 pt-2">
-                        <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-mono text-textMuted">Wave Control</span>
-                        <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-mono text-textMuted">TP Management</span>
-                        <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-mono text-textMuted">Objective Focus</span>
-                    </div>
-                </div>
-                <!-- Expertise Card 3 -->
-                <div class="p-8 rounded-3xl glass-effect space-y-6 hover-lift border border-white/5 group hover:border-accent/30 transition-all">
-                    <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all">
-                        <i data-lucide="target" class="w-7 h-7"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-3">野区联动与反蹲</h3>
-                        <p class="text-sm text-textMuted leading-relaxed">
-                            对敌方打野动向有极高的敏锐度。擅长配合己方打野进行越塔或先锋团战。通过入侵敌方上半野区扩大上路领先优势。
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap gap-2 pt-2">
-                        <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-mono text-textMuted">Jungle Tracking</span>
-                        <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-mono text-textMuted">Counter Gank</span>
-                        <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-mono text-textMuted">Invading</span>
-                    </div>
-                </div>
-                <!-- Expertise Card 4 -->
-                <div class="p-8 rounded-3xl glass-effect space-y-6 hover-lift border border-white/5 group hover:border-accent/30 transition-all">
-                    <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all">
-                        <i data-lucide="gem" class="w-7 h-7"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-3">团战切入与控制</h3>
-                        <p class="text-sm text-textMuted leading-relaxed">
-                            坦克英雄能精准切入敌方 C 位，提供关键控制。战士英雄能在团战边缘拉扯，找准时机进场收割。
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap gap-2 pt-2">
-                        <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-mono text-textMuted">Teamfight Positioning</span>
-                        <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-mono text-textMuted">Focus Fire</span>
-                        <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-mono text-textMuted">Zone Control</span>
+                    <div class="champion-stats flex justify-between pt-6 border-t border-white/5">
+                        <div class="text-center">
+                            <div class="text-sm font-black">98</div>
+                            <div class="text-[9px] text-textMuted uppercase font-bold tracking-tighter">Played</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-sm font-black">3.2</div>
+                            <div class="text-[9px] text-textMuted uppercase font-bold tracking-tighter">KDA</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-sm font-black">Immovable</div>
+                            <div class="text-[9px] text-textMuted uppercase font-bold tracking-tighter">Mastery</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Philosophy Section -->
-    <section id="philosophy" class="py-32 px-6 max-w-6xl mx-auto reveal relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full bg-accent/5 -skew-y-3 -z-10"></div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div>
-                <h2 class="text-4xl font-bold mb-8">上路对线哲学：<br>意志的较量</h2>
-                <div class="space-y-8">
-                    <div class="flex gap-6">
-                        <div class="text-3xl font-mono text-accent/40 font-bold">01</div>
-                        <div>
-                            <h4 class="text-xl font-bold mb-2">兵线即是生命</h4>
-                            <p class="text-textMuted text-sm leading-relaxed">上路不只是杀人，更是对兵线的管理。谁掌控了兵线，谁就掌控了回城时机、TP 时机以及对打野的诱饵。</p>
+    <!-- Match History (The real OP.GG feel) -->
+    <section id="projects" class="py-32 px-6 max-w-7xl mx-auto reveal">
+        <div class="flex items-center justify-between mb-16">
+            <h2 class="text-4xl font-black tracking-tighter uppercase italic">Match <span class="text-accent">History</span></h2>
+            <div class="text-xs font-mono text-textMuted uppercase tracking-widest">Live Sync: 10 mins ago</div>
+        </div>
+        
+        <div class="space-y-4">
+            <!-- Match 1: Fiora Victory -->
+            <div class="win-gradient glass-effect p-6 rounded-lg flex flex-col md:flex-row items-center gap-8 group hover:bg-win/5 transition-all">
+                <div class="flex items-center gap-6 md:w-1/5">
+                    <div class="text-center min-w-[60px]">
+                        <div class="text-xs font-black text-win uppercase mb-1">Victory</div>
+                        <div class="text-[10px] text-textMuted font-mono">28m 42s</div>
+                    </div>
+                    <div class="relative">
+                        <img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/champion/Fiora.png" alt="Fiora" class="w-14 h-14 rounded-lg border border-white/10">
+                        <div class="absolute -bottom-1 -right-1 bg-primary text-[8px] font-bold px-1 rounded border border-white/10 text-win">18</div>
+                    </div>
+                </div>
+                <div class="flex flex-col md:w-1/6">
+                    <div class="flex gap-1 mb-2">
+                        <div class="w-6 h-6 rounded bg-secondary border border-white/5 flex items-center justify-center text-[8px] font-bold">F</div>
+                        <div class="w-6 h-6 rounded bg-secondary border border-white/5 flex items-center justify-center text-[8px] font-bold text-accent">TP</div>
+                    </div>
+                    <div class="flex gap-1">
+                        <div class="w-6 h-6 rounded-full bg-secondary border border-white/5"></div>
+                        <div class="w-6 h-6 rounded-full bg-secondary border border-white/5"></div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-12 md:w-1/4">
+                    <div class="text-center">
+                        <div class="text-2xl font-black tracking-tighter"><span class="text-win">12</span> / <span class="text-loss">2</span> / 5</div>
+                        <div class="text-[10px] text-textMuted font-mono uppercase tracking-tighter mt-1">8.50 KDA (MVP)</div>
+                    </div>
+                    <div class="text-[10px] text-textMuted font-bold leading-tight">
+                        <div class="text-win">72% P/Kill</div>
+                        <div>CS 284 (9.8)</div>
+                        <div>Control 25</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-1 md:w-1/4">
+                    <div class="grid grid-cols-4 gap-1">
+                        <div class="w-8 h-8 rounded bg-secondary/80 border border-white/5"></div>
+                        <div class="w-8 h-8 rounded bg-secondary/80 border border-white/5"></div>
+                        <div class="w-8 h-8 rounded bg-secondary/80 border border-white/5"></div>
+                        <div class="w-8 h-8 rounded bg-secondary/80 border border-white/5"></div>
+                        <div class="w-8 h-8 rounded bg-secondary/80 border border-white/5"></div>
+                        <div class="w-8 h-8 rounded bg-secondary/80 border border-white/5"></div>
+                        <div class="w-8 h-8 rounded-full bg-accent/20 border border-accent/30 flex items-center justify-center">
+                            <i data-lucide="eye" class="w-3 h-3 text-accent"></i>
                         </div>
                     </div>
-                    <div class="flex gap-6">
-                        <div class="text-3xl font-mono text-accent/40 font-bold">02</div>
-                        <div>
-                            <h4 class="text-xl font-bold mb-2">面向细节设计</h4>
-                            <p class="text-textMuted text-sm leading-relaxed">每一个普攻的后摇取消、每一瓶药水的开启时间，都是决定生死的一线之间。高手对线，比的是细节。</p>
+                </div>
+                <div class="flex flex-col items-end md:ml-auto">
+                    <div class="flex gap-2">
+                        <span class="px-2 py-0.5 bg-win/20 text-win text-[9px] font-black rounded italic">PENTAKILL</span>
+                        <span class="px-2 py-0.5 bg-accent text-white text-[9px] font-black rounded shadow-[0_0_15px_rgba(83,131,232,0.5)]">MVP</span>
+                    </div>
+                    <div class="mt-3 flex -space-x-1.5">
+                        <div class="w-5 h-5 rounded-full bg-white/5 border border-primary"></div>
+                        <div class="w-5 h-5 rounded-full bg-white/5 border border-primary"></div>
+                        <div class="w-5 h-5 rounded-full bg-white/5 border border-primary"></div>
+                        <div class="w-5 h-5 rounded-full bg-white/5 border border-primary"></div>
+                        <div class="w-5 h-5 rounded-full bg-white/5 border border-primary"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Match 2: Jax Loss -->
+            <div class="loss-gradient glass-effect p-6 rounded-lg flex flex-col md:flex-row items-center gap-8 group hover:bg-loss/5 transition-all">
+                <div class="flex items-center gap-6 md:w-1/5">
+                    <div class="text-center min-w-[60px]">
+                        <div class="text-xs font-black text-loss uppercase mb-1">Defeat</div>
+                        <div class="text-[10px] text-textMuted font-mono">32m 15s</div>
+                    </div>
+                    <div class="relative">
+                        <img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/champion/Jax.png" alt="Jax" class="w-14 h-14 rounded-lg border border-white/10 grayscale-[0.5]">
+                        <div class="absolute -bottom-1 -right-1 bg-primary text-[8px] font-bold px-1 rounded border border-white/10">17</div>
+                    </div>
+                </div>
+                <div class="flex flex-col md:w-1/6">
+                    <div class="flex gap-1 mb-2">
+                        <div class="w-6 h-6 rounded bg-secondary border border-white/5 flex items-center justify-center text-[8px] font-bold">F</div>
+                        <div class="w-6 h-6 rounded bg-secondary border border-white/5 flex items-center justify-center text-[8px] font-bold text-accent">TP</div>
+                    </div>
+                    <div class="flex gap-1">
+                        <div class="w-6 h-6 rounded-full bg-secondary border border-white/5"></div>
+                        <div class="w-6 h-6 rounded-full bg-secondary border border-white/5"></div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-12 md:w-1/4">
+                    <div class="text-center">
+                        <div class="text-2xl font-black tracking-tighter">5 / <span class="text-loss">6</span> / 2</div>
+                        <div class="text-[10px] text-textMuted font-mono uppercase tracking-tighter mt-1">1.17 KDA</div>
+                    </div>
+                    <div class="text-[10px] text-textMuted font-bold leading-tight">
+                        <div class="text-loss">35% P/Kill</div>
+                        <div>CS 245 (7.6)</div>
+                        <div>Control 12</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-1 md:w-1/4">
+                    <div class="grid grid-cols-4 gap-1">
+                        <div class="w-8 h-8 rounded bg-secondary/80 border border-white/5"></div>
+                        <div class="w-8 h-8 rounded bg-secondary/80 border border-white/5"></div>
+                        <div class="w-8 h-8 rounded bg-secondary/80 border border-white/5"></div>
+                        <div class="w-8 h-8 rounded bg-secondary/80 border border-white/5"></div>
+                        <div class="w-8 h-8 rounded bg-secondary/80 border border-white/5"></div>
+                        <div class="w-8 h-8 rounded bg-secondary/80 border border-white/5"></div>
+                        <div class="w-8 h-8 rounded-full bg-accent/10 border border-white/5 flex items-center justify-center">
+                            <i data-lucide="eye" class="w-3 h-3 text-textMuted"></i>
                         </div>
                     </div>
-                    <div class="flex gap-6">
-                        <div class="text-3xl font-mono text-accent/40 font-bold">03</div>
+                </div>
+                <div class="flex flex-col items-end md:ml-auto">
+                    <div class="flex gap-2">
+                        <span class="px-2 py-0.5 bg-white/10 text-textMuted text-[9px] font-black rounded uppercase">Top Diff</span>
+                        <span class="px-2 py-0.5 bg-loss/20 text-loss text-[9px] font-black rounded italic">ACE</span>
+                    </div>
+                    <div class="mt-3 flex -space-x-1.5">
+                        <div class="w-5 h-5 rounded-full bg-white/5 border border-primary"></div>
+                        <div class="w-5 h-5 rounded-full bg-white/5 border border-primary"></div>
+                        <div class="w-5 h-5 rounded-full bg-white/5 border border-primary"></div>
+                        <div class="w-5 h-5 rounded-full bg-white/5 border border-primary"></div>
+                        <div class="w-5 h-5 rounded-full bg-white/5 border border-primary"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Match 3: Camille Victory -->
+            <div class="win-gradient glass-effect p-6 rounded-lg flex flex-col md:flex-row items-center gap-8 group hover:bg-win/5 transition-all">
+                <div class="flex items-center gap-6 md:w-1/5">
+                    <div class="text-center min-w-[60px]">
+                        <div class="text-xs font-black text-win uppercase mb-1">Victory</div>
+                        <div class="text-[10px] text-textMuted font-mono">24m 10s</div>
+                    </div>
+                    <div class="relative">
+                        <img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/champion/Camille.png" alt="Camille" class="w-14 h-14 rounded-lg border border-white/10">
+                        <div class="absolute -bottom-1 -right-1 bg-primary text-[8px] font-bold px-1 rounded border border-white/10 text-win">16</div>
+                    </div>
+                </div>
+                <div class="flex flex-col md:w-1/6">
+                    <div class="flex gap-1 mb-2">
+                        <div class="w-6 h-6 rounded bg-secondary border border-white/5 flex items-center justify-center text-[8px] font-bold">F</div>
+                        <div class="w-6 h-6 rounded bg-secondary border border-white/5 flex items-center justify-center text-[8px] font-bold text-accent">TP</div>
+                    </div>
+                    <div class="flex gap-1">
+                        <div class="w-6 h-6 rounded-full bg-secondary border border-white/5"></div>
+                        <div class="w-6 h-6 rounded-full bg-secondary border border-white/5"></div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-12 md:w-1/4">
+                    <div class="text-center">
+                        <div class="text-2xl font-black tracking-tighter"><span class="text-win">8</span> / <span class="text-loss">1</span> / 12</div>
+                        <div class="text-[10px] text-textMuted font-mono uppercase tracking-tighter mt-1">20.0 KDA</div>
+                    </div>
+                    <div class="text-[10px] text-textMuted font-bold leading-tight">
+                        <div class="text-win">85% P/Kill</div>
+                        <div>CS 210 (8.7)</div>
+                        <div>Control 42</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-1 md:w-1/4">
+                    <div class="grid grid-cols-4 gap-1">
+                        <div class="w-8 h-8 rounded bg-secondary/80 border border-white/5"></div>
+                        <div class="w-8 h-8 rounded bg-secondary/80 border border-white/5"></div>
+                        <div class="w-8 h-8 rounded bg-secondary/80 border border-white/5"></div>
+                        <div class="w-8 h-8 rounded bg-secondary/80 border border-white/5"></div>
+                        <div class="w-8 h-8 rounded bg-secondary/80 border border-white/5"></div>
+                        <div class="w-8 h-8 rounded bg-secondary/80 border border-white/5"></div>
+                        <div class="w-8 h-8 rounded-full bg-accent/20 border border-accent/30 flex items-center justify-center">
+                            <i data-lucide="eye" class="w-3 h-3 text-accent"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col items-end md:ml-auto">
+                    <div class="flex gap-2">
+                        <span class="px-2 py-0.5 bg-win/20 text-win text-[9px] font-black rounded italic">GODLIKE</span>
+                    </div>
+                    <div class="mt-3 flex -space-x-1.5">
+                        <div class="w-5 h-5 rounded-full bg-white/5 border border-primary"></div>
+                        <div class="w-5 h-5 rounded-full bg-white/5 border border-primary"></div>
+                        <div class="w-5 h-5 rounded-full bg-white/5 border border-primary"></div>
+                        <div class="w-5 h-5 rounded-full bg-white/5 border border-primary"></div>
+                        <div class="w-5 h-5 rounded-full bg-white/5 border border-primary"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-12 text-center">
+            <button class="px-12 py-4 bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-[0.3em] hover:bg-white/10 transition-all">
+                Load More History
+            </button>
+        </div>
+    </section>
+
+    <!-- Laning Tactics (Deeper Content) -->
+    <section id="philosophy" class="py-32 px-6 max-w-7xl mx-auto reveal relative">
+        <div class="absolute inset-0 bg-accent/[0.02] -skew-y-2 -z-10"></div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+            <div class="lg:col-span-5 space-y-8">
+                <h2 class="text-5xl font-black tracking-tighter uppercase italic leading-none">The <span class="text-accent">Tactical</span><br>Manual.</h2>
+                <p class="text-textMuted leading-relaxed">
+                    对线不是简单的补刀，是关于心理、反应速度与博弈论的综合体。我将我的对线经验总结为三个核心维度：
+                </p>
+                <div class="space-y-6 pt-6">
+                    <div class="flex gap-6 group">
+                        <div class="text-4xl font-black text-white/5 group-hover:text-accent transition-colors italic">01</div>
                         <div>
-                            <h4 class="text-xl font-bold mb-2">心理博弈论</h4>
-                            <p class="text-textMuted text-sm leading-relaxed">预判对手的预判。通过故意卖破绽诱导对手上当，或者在对方急于推线时进行强力反击。</p>
+                            <h4 class="text-lg font-black uppercase mb-2">兵线回推逻辑 (Wave Manipulation)</h4>
+                            <p class="text-[11px] text-textMuted leading-relaxed">精准判断“第几波兵线”会回推。利用慢推（Slow Push）积累巨量小兵，配合打野越塔或强行 TP 支援，让对方无法回防。</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 group">
+                        <div class="text-4xl font-black text-white/5 group-hover:text-accent transition-colors italic">02</div>
+                        <div>
+                            <h4 class="text-lg font-black uppercase mb-2">斩杀线预判 (Kill Pressure)</h4>
+                            <p class="text-[11px] text-textMuted leading-relaxed">不仅仅是看血量，还要计算对方的防御力、护盾 CD、药水回复以及升级时的血量突变。在对方最自信的瞬间完成斩杀。</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 group">
+                        <div class="text-4xl font-black text-white/5 group-hover:text-accent transition-colors italic">03</div>
+                        <div>
+                            <h4 class="text-lg font-black uppercase mb-2">TP 落地博弈 (Teleport Strategy)</h4>
+                            <p class="text-[11px] text-textMuted leading-relaxed">顶级上单的 TP 从不只是为了守塔。学会利用眼位绕后，在小龙团战开启前 5 秒精准落地，彻底改写团战走向。</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="relative">
-                <div class="aspect-square glass-effect rounded-[4rem] flex items-center justify-center p-12 border border-accent/20">
-                    <div class="space-y-6 w-full">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-xs font-mono text-textMuted uppercase tracking-wider">Laning Mastery</span>
-                            <span class="text-xs font-mono text-accent">TOP 1%</span>
+            <div class="lg:col-span-7">
+                <div class="h-full glass-effect rounded-2xl p-1 border border-white/5">
+                    <div class="h-full bg-primary/50 rounded-xl p-10 flex flex-col justify-center relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-8 opacity-10">
+                            <i data-lucide="shield" class="w-64 h-64"></i>
                         </div>
-                        <div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
-                            <div class="h-full bg-accent w-[95%] animate-pulse"></div>
-                        </div>
-                        <div class="h-2 w-3/4 bg-white/5 rounded-full overflow-hidden">
-                            <div class="h-full bg-accent/60 w-[85%]"></div>
-                        </div>
-                        <div class="h-2 w-5/6 bg-white/5 rounded-full overflow-hidden">
-                            <div class="h-full bg-accent/40 w-[70%]"></div>
-                        </div>
-                        <div class="mt-12 p-6 bg-accent/5 rounded-2xl border border-accent/10 italic text-sm text-accent/80 leading-relaxed">
-                            "真正的上单王者，不仅能在对线期单杀对手，更能通过一个完美的 TP 改变整场比赛的走向。"
+                        <div class="space-y-12 relative z-10">
+                            <div class="space-y-4">
+                                <div class="text-xs font-mono text-accent uppercase tracking-widest font-bold">Pro Tip: 1级换血</div>
+                                <h5 class="text-3xl font-black uppercase leading-tight italic">
+                                    "在对方补第一个远程兵的瞬间，<br>
+                                    是你打出压制力的最佳时机。"
+                                </h5>
+                            </div>
+                            <div class="grid grid-cols-2 gap-10">
+                                <div>
+                                    <div class="text-win text-sm font-black mb-2 tracking-widest uppercase">Aggression</div>
+                                    <p class="text-[10px] text-textMuted leading-relaxed">利用草丛规避小兵仇恨。在对方技能真空期进行毁灭性打击，强行打出闪现或回城。</p>
+                                </div>
+                                <div>
+                                    <div class="text-accent text-sm font-black mb-2 tracking-widest uppercase">Precision</div>
+                                    <p class="text-[10px] text-textMuted leading-relaxed">保持对敌方打野位置的绝对敏锐。在 3:15 秒先锋刷新前，确保自己拥有绝对的推线权。</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -308,188 +588,88 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-32 px-6 max-w-6xl mx-auto reveal">
-        <div class="mb-20 text-center">
-            <h2 class="text-4xl font-bold mb-6">排位战绩解析</h2>
-            <p class="text-textMuted max-w-2xl mx-auto">
-                实时同步 OP.GG 核心数据，展示真实的排位表现。
-            </p>
-        </div>
-        <div class="space-y-12">
-            <!-- Project Card 1 (Detailed) -->
-            <div class="group grid grid-cols-1 md:grid-cols-12 gap-0 rounded-[2.5rem] overflow-hidden border border-white/5 hover:border-accent/20 transition-all duration-500">
-                <div class="md:col-span-5 bg-secondary/50 p-12 flex flex-col justify-between">
-                    <div>
-                        <div class="text-xs font-mono text-accent mb-4">MATCH RECORD 01</div>
-                        <h3 class="text-3xl font-bold mb-6">剑姬极致分推局</h3>
-                        <p class="text-textMuted text-sm leading-relaxed mb-8">
-                            在一场均势局中，通过无解的边路单带牵制敌方三人，最终在己方 4v4 守塔的同时单人拆掉敌方基地。
-                        </p>
+    <!-- Duo & Coaching (Academy) -->
+    <section id="services" class="py-32 px-6 max-w-7xl mx-auto reveal">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div class="flex flex-col justify-center space-y-10">
+                <div class="space-y-4">
+                    <h2 class="text-5xl font-black tracking-tighter uppercase italic leading-none">The <span class="text-accent">Academy.</span></h2>
+                    <p class="text-textMuted max-w-md leading-relaxed">
+                        如果你想跨越目前的瓶颈，这里提供最硬核的上路特训。不仅是上分，更是游戏理解的重塑。
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="p-6 glass-effect border border-white/5 flex items-center gap-6 group hover:border-accent/30 transition-all cursor-pointer">
+                        <div class="w-12 h-12 rounded bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all">
+                            <i data-lucide="video"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-black uppercase">VOD Analysis</div>
+                            <div class="text-[10px] text-textMuted uppercase tracking-widest">1对1 对局复盘</div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 ml-auto text-textMuted group-hover:text-accent"></i>
                     </div>
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between text-xs border-b border-white/5 pb-2">
-                            <span class="text-textMuted">对位表现</span>
-                            <span class="text-win font-mono">12/2/5 (MVP)</span>
+                    <div class="p-6 glass-effect border border-white/5 flex items-center gap-6 group hover:border-accent/30 transition-all cursor-pointer">
+                        <div class="w-12 h-12 rounded bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all">
+                            <i data-lucide="users"></i>
                         </div>
-                        <div class="flex items-center justify-between text-xs border-b border-white/5 pb-2">
-                            <span class="text-textMuted">建筑伤害</span>
-                            <span class="text-accent font-mono">12,500 (全场最高)</span>
+                        <div>
+                            <div class="text-sm font-black uppercase">Duo Queue</div>
+                            <div class="text-[10px] text-textMuted uppercase tracking-widest">高端排位陪练</div>
                         </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 ml-auto text-textMuted group-hover:text-accent"></i>
                     </div>
                 </div>
-                <div class="md:col-span-7 bg-primary/30 p-12 border-l border-white/5 relative group-hover:bg-accent/[0.02] transition-colors">
-                    <h4 class="text-sm font-bold text-textMain mb-6 uppercase tracking-wider">出装与符文决策</h4>
+            </div>
+            <div class="p-12 glass-effect border border-white/5 rounded-3xl space-y-8">
+                <div class="space-y-2">
+                    <h3 class="text-2xl font-black uppercase tracking-tighter">Application</h3>
+                    <p class="text-xs text-textMuted">申请双排或特训，请务必如实填写你的游戏信息。</p>
+                </div>
+                <form class="space-y-6">
                     <div class="grid grid-cols-2 gap-6">
                         <div class="space-y-2">
-                            <div class="text-accent font-bold">核心装备</div>
-                            <p class="text-[11px] text-textMuted">贪欲九头蛇 + 三相之力。极致的推线速度与 1v1 对拼强度。</p>
+                            <label class="text-[10px] font-black uppercase tracking-widest text-textMuted">Summoner ID</label>
+                            <input type="text" placeholder="游戏ID" class="w-full bg-primary border border-white/10 rounded-sm px-4 py-3 text-xs focus:border-accent outline-none transition-all">
                         </div>
                         <div class="space-y-2">
-                            <div class="text-accent font-bold">符文选择</div>
-                            <p class="text-[11px] text-textMuted">征服者 + 爆破。确保后期持续作战能力与拆塔效率。</p>
-                        </div>
-                        <div class="space-y-2">
-                            <div class="text-accent font-bold">对线思路</div>
-                            <p class="text-[11px] text-textMuted">通过 Q 技能消耗对方不灭之握，6 级后大招精准斩杀。</p>
-                        </div>
-                        <div class="space-y-2">
-                            <div class="text-accent font-bold">局势把控</div>
-                            <p class="text-[11px] text-textMuted">在大龙刷新前保持在下路分推，迫使对方做出艰难抉择。</p>
+                            <label class="text-[10px] font-black uppercase tracking-widest text-textMuted">Server</label>
+                            <input type="text" placeholder="所在大区" class="w-full bg-primary border border-white/10 rounded-sm px-4 py-3 text-xs focus:border-accent outline-none transition-all">
                         </div>
                     </div>
-                    <div class="mt-12 flex space-x-4">
-                        <span class="px-4 py-2 bg-white/5 rounded-lg text-xs font-mono">#Fiora</span>
-                        <span class="px-4 py-2 bg-white/5 rounded-lg text-xs font-mono">#SplitPush</span>
-                        <span class="px-4 py-2 bg-white/5 rounded-lg text-xs font-mono">#ChallengerTier</span>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-textMuted">Contact Info</label>
+                        <input type="text" placeholder="微信 / QQ / Email" class="w-full bg-primary border border-white/10 rounded-sm px-4 py-3 text-xs focus:border-accent outline-none transition-all">
                     </div>
-                </div>
-            </div>
-
-            <!-- Project Card 2 (Detailed) -->
-            <div class="group grid grid-cols-1 md:grid-cols-12 gap-0 rounded-[2.5rem] overflow-hidden border border-white/5 hover:border-accent/20 transition-all duration-500">
-                <div class="md:col-span-5 bg-secondary/50 p-12 flex flex-col justify-between">
-                    <div>
-                        <div class="text-xs font-mono text-accent mb-4">MATCH RECORD 02</div>
-                        <h3 class="text-3xl font-bold mb-6">奥恩教科书式团战</h3>
-                        <p class="text-textMuted text-sm leading-relaxed mb-8">
-                            面对敌方四冲阵，作为队伍唯一前排，通过完美的羊鸣控制和地形限制，保护己方双 C 完美输出完成翻盘。
-                        </p>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-textMuted">Objective</label>
+                        <textarea rows="4" placeholder="例如：白金突破到钻石、学习青钢影单带思路..." class="w-full bg-primary border border-white/10 rounded-sm px-4 py-3 text-xs focus:border-accent outline-none transition-all resize-none"></textarea>
                     </div>
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between text-xs border-b border-white/5 pb-2">
-                            <span class="text-textMuted">承伤占比</span>
-                            <span class="text-textMain font-mono">45% (全队最高)</span>
-                        </div>
-                        <div class="flex items-center justify-between text-xs border-b border-white/5 pb-2">
-                            <span class="text-textMuted">控制时间</span>
-                            <span class="text-accent font-mono">18.5s</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:col-span-7 bg-primary/30 p-12 border-l border-white/5 relative group-hover:bg-accent/[0.02] transition-colors">
-                    <h4 class="text-sm font-bold text-textMain mb-6 uppercase tracking-wider">团队贡献细节</h4>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="space-y-2">
-                            <div class="text-accent font-bold">打铁升级</div>
-                            <p class="text-[11px] text-textMuted">优先为队伍核心输出位升级神话装备，提供额外的属性领先。</p>
-                        </div>
-                        <div class="space-y-2">
-                            <div class="text-accent font-bold">反手开团</div>
-                            <p class="text-[11px] text-textMuted">在对方突进的一瞬间反手大招，造成大面积击飞效果。</p>
-                        </div>
-                        <div class="space-y-2">
-                            <div class="text-accent font-bold">地形分割</div>
-                            <p class="text-[11px] text-textMuted">利用 Q 技能生成地形配合 E 技能击飞，将敌方阵容一分为二。</p>
-                        </div>
-                        <div class="space-y-2">
-                            <div class="text-accent font-bold">坦度保障</div>
-                            <p class="text-[11px] text-textMuted">深渊面具 + 荆棘之甲。针对敌方双 AP 阵容做出的最优防御选择。</p>
-                        </div>
-                    </div>
-                    <div class="mt-12 flex space-x-4">
-                        <span class="px-4 py-2 bg-white/5 rounded-lg text-xs font-mono">#Ornn</span>
-                        <span class="px-4 py-2 bg-white/5 rounded-lg text-xs font-mono">#Teamfight</span>
-                        <span class="px-4 py-2 bg-white/5 rounded-lg text-xs font-mono">#TankMastery</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-32 px-6 max-w-6xl mx-auto reveal">
-        <div class="glass-effect rounded-[3.5rem] p-12 md:p-20 relative overflow-hidden">
-            <div class="absolute bottom-0 right-0 w-64 h-64 bg-accent/10 blur-[100px] rounded-full -z-10"></div>
-            <div class="flex flex-col md:flex-row gap-16">
-                <div class="md:w-1/2">
-                    <h2 class="text-4xl font-bold mb-8 text-gradient">上分教学与<br>双排预约</h2>
-                    <p class="text-textMuted leading-relaxed mb-10">
-                        如果你正困在某个段位止步不前，我可以为你提供专业的上路视角分析与双排支持：
-                    </p>
-                    <div class="space-y-6">
-                        <div class="flex items-start space-x-4">
-                            <div class="p-2 bg-accent/20 rounded-lg text-accent mt-1">
-                                <i data-lucide="monitor-play" class="w-5 h-5"></i>
-                            </div>
-                            <div>
-                                <h5 class="font-bold text-textMain">对局复盘 (VOD Review)</h5>
-                                <p class="text-xs text-textMuted">通过录像分析你的每一个走位、兵线选择和团战决策，找出上分的致命伤。</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4">
-                            <div class="p-2 bg-accent/20 rounded-lg text-accent mt-1">
-                                <i data-lucide="users" class="w-5 h-5"></i>
-                            </div>
-                            <div>
-                                <h5 class="font-bold text-textMain">高端双排上分 (Duo Queue)</h5>
-                                <p class="text-xs text-textMuted">提供顶级的上单压制力，配合你的打野/中路位置，快速跨越段位瓶颈。</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4">
-                            <div class="p-2 bg-accent/20 rounded-lg text-accent mt-1">
-                                <i data-lucide="award" class="w-5 h-5"></i>
-                            </div>
-                            <div>
-                                <h5 class="font-bold text-textMain">英雄专项特训</h5>
-                                <p class="text-xs text-textMuted">针对某个英雄的极致微操与对抗策略进行一对一深度传授。</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:w-1/2 flex flex-col justify-center">
-                    <div class="p-8 bg-white/5 rounded-3xl border border-white/10 space-y-6">
-                        <h4 class="text-xl font-bold">提交双排申请</h4>
-                        <p class="text-sm text-textMuted">请告知你的当前段位、大区以及想要提升的目标。</p>
-                        <form class="space-y-4">
-                            <div class="grid grid-cols-2 gap-4">
-                                <input type="text" placeholder="游戏 ID" class="w-full bg-primary/50 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-accent outline-none transition-colors">
-                                <input type="text" placeholder="所在大区" class="w-full bg-primary/50 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-accent outline-none transition-colors">
-                            </div>
-                            <input type="email" placeholder="联系邮箱/微信" class="w-full bg-primary/50 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-accent outline-none transition-colors">
-                            <textarea placeholder="描述你的需求 (例如：想要学习剑姬拉扯、需要双排上王者等...)" rows="4" class="w-full bg-primary/50 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-accent outline-none transition-colors resize-none"></textarea>
-                            <button class="w-full py-4 bg-accent text-white rounded-xl font-bold hover:bg-accent/90 transition-all">提交申请</button>
-                        </form>
-                    </div>
-                </div>
+                    <button class="w-full py-5 bg-accent text-white font-black uppercase tracking-[0.3em] text-xs hover:bg-accent/80 transition-all shadow-[0_0_40px_rgba(83,131,232,0.2)]">
+                        Submit Application
+                    </button>
+                </form>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-16 px-6 max-w-6xl mx-auto border-t border-white/5">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-8">
-            <div class="font-mono font-bold text-lg tracking-tighter">
-                <span class="text-accent">TOP</span>LANE<span class="text-accent"> /&gt;</span>
+    <footer class="py-20 px-6 border-t border-white/5">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+            <div class="flex flex-col items-center md:items-start gap-4">
+                <div class="font-mono font-black text-2xl tracking-tighter bg-accent px-3 py-1 rounded italic">
+                    TOPLANE
+                </div>
+                <p class="text-[10px] text-textMuted font-bold uppercase tracking-[0.2em]">Designed for Ranked Dominance.</p>
             </div>
-            <div class="flex space-x-8 text-xs text-textMuted uppercase tracking-widest font-mono">
-                <a href="https://github.com" class="hover:text-textMain transition-colors">OP.GG</a>
-                <a href="https://linkedin.com" class="hover:text-textMain transition-colors">HUYA/DOUYU</a>
-                <a href="mailto:player@example.com" class="hover:text-textMain transition-colors">CONTACT</a>
+            <div class="flex gap-12 text-[10px] font-black uppercase tracking-[0.3em] text-textMuted">
+                <a href="#" class="hover:text-accent transition-colors">OP.GG</a>
+                <a href="#" class="hover:text-accent transition-colors">Huya</a>
+                <a href="#" class="hover:text-accent transition-colors">Bilibili</a>
             </div>
-            <div class="text-[10px] text-textMuted/60 font-mono">
-                © 2026 LIU XIAOYOU. ALL RIGHTS RESERVED. <br>
-                DESIGNED FOR RANKED DOMINANCE.
+            <div class="text-right">
+                <div class="text-[10px] text-textMuted font-mono uppercase">© 2026 LIU XIAOYOU. ALL RIGHTS RESERVED.</div>
+                <div class="text-[9px] text-accent/50 font-mono mt-1 uppercase tracking-widest">Built with precision & high mechanical intent.</div>
             </div>
         </div>
     </footer>
