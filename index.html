@@ -205,121 +205,169 @@
     <section id="expertise" class="py-32 px-6 max-w-7xl mx-auto reveal">
         <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
             <div class="space-y-4">
-                <h2 class="text-4xl font-black tracking-tighter uppercase italic">The Champion <span class="text-accent">Pool</span></h2>
+                <h2 class="text-4xl font-black tracking-tighter uppercase italic">Champion <span class="text-accent">Deep Dive</span></h2>
                 <p class="text-textMuted max-w-xl text-sm leading-relaxed">
-                    不仅是操作者，更是机制的解构者。根据对位情况（Counter-Pick）选择最优解，从选人阶段就开始统治比赛。
+                    同步 OP.GG 核心数据。不仅是胜率，更是对每一个技能（P/Q/W/E/R）和出装路径的极致理解。
                 </p>
             </div>
             <div class="flex gap-4">
-                <button class="px-6 py-2 bg-accent text-[10px] font-black uppercase tracking-widest rounded-sm">All</button>
-                <button class="px-6 py-2 bg-white/5 text-[10px] font-black uppercase tracking-widest rounded-sm hover:bg-white/10">Fighters</button>
-                <button class="px-6 py-2 bg-white/5 text-[10px] font-black uppercase tracking-widest rounded-sm hover:bg-white/10">Tanks</button>
+                <div class="flex items-center space-x-2 bg-secondary/50 px-4 py-2 rounded-sm border border-white/5">
+                    <span class="text-[10px] font-bold text-textMuted uppercase">Patch</span>
+                    <span class="text-[10px] font-black text-accent">14.5</span>
+                </div>
             </div>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Champion 1: Fiora -->
-            <div class="champion-card p-10 glass-effect border border-white/5 group relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-accent/5 -rotate-45 translate-x-16 -translate-y-16"></div>
-                <div class="relative z-10 space-y-8">
-                    <div class="flex justify-between items-center">
-                        <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
-                            <i data-lucide="sword" class="w-8 h-8"></i>
-                        </div>
-                        <div class="text-right">
-                            <div class="text-[10px] text-textMuted font-bold uppercase tracking-widest">Win Rate</div>
-                            <div class="text-2xl font-black text-win">72%</div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Champion Detail 1: Kled (Inspired by the requested URL) -->
+            <div class="lg:col-span-3 glass-effect rounded-2xl overflow-hidden border border-white/5 flex flex-col xl:flex-row">
+                <div class="xl:w-1/3 p-10 border-b xl:border-b-0 xl:border-r border-white/5 bg-gradient-to-br from-accent/5 to-transparent">
+                    <div class="flex items-center gap-6 mb-10">
+                        <img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/champion/Kled.png" alt="Kled" class="w-24 h-24 rounded-2xl border-2 border-accent/20 shadow-2xl">
+                        <div>
+                            <h3 class="text-4xl font-black uppercase tracking-tighter">Kled</h3>
+                            <div class="text-xs font-mono text-accent uppercase tracking-widest mt-1">暴怒骑士 / Top</div>
                         </div>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-black uppercase tracking-tighter mb-2">Fiora <span class="text-xs font-mono font-normal text-textMuted ml-2">无双剑姬</span></h3>
-                        <p class="text-xs text-textMuted leading-relaxed">
-                            极致的对线压制力与单带统治力。精通“一秒四破”与 W 技能的各种神级格挡，能在 1v2 甚至 1v3 中反杀。
-                        </p>
+                    <div class="space-y-8">
+                        <div>
+                            <div class="text-[10px] text-textMuted font-black uppercase tracking-[0.2em] mb-4">Skills & Mastery</div>
+                            <div class="flex gap-3">
+                                <img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/passive/KledPassive.png" class="w-10 h-10 rounded border border-white/10 hover:border-accent transition-all cursor-help" title="Passive">
+                                <img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/spell/KledQ.png" class="w-10 h-10 rounded border border-accent transition-all cursor-help shadow-[0_0_10px_rgba(83,131,232,0.3)]" title="Q - Bear Trap on a Rope">
+                                <img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/spell/KledW.png" class="w-10 h-10 rounded border border-white/10 hover:border-accent transition-all cursor-help" title="W - Violent Tendencies">
+                                <img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/spell/KledE.png" class="w-10 h-10 rounded border border-white/10 hover:border-accent transition-all cursor-help" title="E - Jousting">
+                                <img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/spell/KledR.png" class="w-10 h-10 rounded border border-white/10 hover:border-accent transition-all cursor-help" title="R - Chaaaaaaaarge!!!">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-4 bg-primary/40 rounded border border-white/5">
+                                <div class="text-[9px] text-textMuted uppercase font-bold mb-1">Win Rate</div>
+                                <div class="text-xl font-black text-win">54.2%</div>
+                            </div>
+                            <div class="p-4 bg-primary/40 rounded border border-white/5">
+                                <div class="text-[9px] text-textMuted uppercase font-bold mb-1">Pick Rate</div>
+                                <div class="text-xl font-black">2.1%</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="champion-stats flex justify-between pt-6 border-t border-white/5">
-                        <div class="text-center">
-                            <div class="text-sm font-black">152</div>
-                            <div class="text-[9px] text-textMuted uppercase font-bold tracking-tighter">Played</div>
+                </div>
+                
+                <div class="xl:w-2/3 p-10 grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <!-- Recommended Build Section -->
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-xs font-black uppercase tracking-widest text-textMain flex items-center gap-2">
+                                <i data-lucide="package" class="w-3 h-3"></i> Recommended Items
+                            </h4>
+                            <span class="text-[9px] font-mono text-win">High Win Rate Build</span>
                         </div>
-                        <div class="text-center">
-                            <div class="text-sm font-black">4.1</div>
-                            <div class="text-[9px] text-textMuted uppercase font-bold tracking-tighter">KDA</div>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded bg-secondary border border-white/10 flex items-center justify-center overflow-hidden">
+                                    <img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/item/6631.png" alt="Stridebreaker" class="w-full h-full object-cover">
+                                </div>
+                                <i data-lucide="chevron-right" class="w-3 h-3 text-textMuted"></i>
+                                <div class="w-10 h-10 rounded bg-secondary border border-white/10 flex items-center justify-center overflow-hidden">
+                                    <img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/item/3071.png" alt="Black Cleaver" class="w-full h-full object-cover">
+                                </div>
+                                <i data-lucide="chevron-right" class="w-3 h-3 text-textMuted"></i>
+                                <div class="w-10 h-10 rounded bg-secondary border border-white/10 flex items-center justify-center overflow-hidden">
+                                    <img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/item/3053.png" alt="Sterak's Gage" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/item/3047.png" class="w-8 h-8 rounded border border-white/10" title="Plated Steelcaps">
+                                <img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/item/3340.png" class="w-8 h-8 rounded border border-white/10" title="Warding Totem">
+                            </div>
                         </div>
-                        <div class="text-center">
-                            <div class="text-sm font-black">Tier 1</div>
-                            <div class="text-[9px] text-textMuted uppercase font-bold tracking-tighter">Mastery</div>
+                        <!-- Skill Order -->
+                        <div class="pt-6 border-t border-white/5">
+                            <div class="text-[9px] text-textMuted font-black uppercase tracking-widest mb-3">Skill Max Order</div>
+                            <div class="flex items-center gap-4">
+                                <span class="text-sm font-black text-accent">Q</span>
+                                <i data-lucide="arrow-right" class="w-3 h-3 text-textMuted"></i>
+                                <span class="text-sm font-black">W</span>
+                                <i data-lucide="arrow-right" class="w-3 h-3 text-textMuted"></i>
+                                <span class="text-sm font-black">E</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Runes Section -->
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-xs font-black uppercase tracking-widest text-textMain flex items-center gap-2">
+                                <i data-lucide="zap" class="w-3 h-3"></i> Rune Configuration
+                            </h4>
+                        </div>
+                        <div class="flex gap-8">
+                            <div class="space-y-4">
+                                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center border border-accent/30">
+                                    <img src="https://ddragon.canisback.com/img/perk-images/Styles/7201_Precision.png" class="w-6 h-6 object-contain grayscale brightness-200">
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <div class="w-6 h-6 rounded-full bg-accent/20 border border-accent"></div>
+                                    <div class="w-6 h-6 rounded-full bg-white/5 border border-white/10"></div>
+                                    <div class="w-6 h-6 rounded-full bg-white/5 border border-white/10"></div>
+                                    <div class="w-6 h-6 rounded-full bg-white/5 border border-white/10"></div>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center border border-white/10">
+                                    <img src="https://ddragon.canisback.com/img/perk-images/Styles/7204_Resolve.png" class="w-6 h-6 object-contain grayscale brightness-200">
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <div class="w-6 h-6 rounded-full bg-white/5 border border-white/10"></div>
+                                    <div class="w-6 h-6 rounded-full bg-white/5 border border-white/10"></div>
+                                </div>
+                                <div class="flex gap-1 pt-2">
+                                    <div class="w-4 h-4 rounded-full bg-accent/40 border border-accent/20"></div>
+                                    <div class="w-4 h-4 rounded-full bg-white/10"></div>
+                                    <div class="w-4 h-4 rounded-full bg-white/10"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Champion 2: Camille -->
-            <div class="champion-card p-10 glass-effect border border-white/5 group relative overflow-hidden">
-                <div class="relative z-10 space-y-8">
-                    <div class="flex justify-between items-center">
-                        <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
-                            <i data-lucide="zap" class="w-8 h-8"></i>
-                        </div>
-                        <div class="text-right">
-                            <div class="text-[10px] text-textMuted font-bold uppercase tracking-widest">Win Rate</div>
-                            <div class="text-2xl font-black text-win">65%</div>
-                        </div>
+            <!-- More champions placeholder in the same style -->
+            <div class="p-8 glass-effect border border-white/5 rounded-2xl flex items-center gap-6 group hover:border-accent/30 transition-all cursor-pointer">
+                <img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/champion/Fiora.png" class="w-16 h-16 rounded-xl border border-white/10">
+                <div class="flex-1">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-lg font-black uppercase">Fiora</span>
+                        <span class="text-[10px] font-bold text-win">Tier S</span>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-black uppercase tracking-tighter mb-2">Camille <span class="text-xs font-mono font-normal text-textMuted ml-2">青钢影</span></h3>
-                        <p class="text-xs text-textMuted leading-relaxed">
-                            全图支援与定点秒杀专家。掌握 E 闪各种角度与二段 Q 的精准爆发。是配合打野越塔与中后期抓单的最优选择。
-                        </p>
-                    </div>
-                    <div class="champion-stats flex justify-between pt-6 border-t border-white/5">
-                        <div class="text-center">
-                            <div class="text-sm font-black">210</div>
-                            <div class="text-[9px] text-textMuted uppercase font-bold tracking-tighter">Played</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-sm font-black">3.6</div>
-                            <div class="text-[9px] text-textMuted uppercase font-bold tracking-tighter">KDA</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-sm font-black">Tier S</div>
-                            <div class="text-[9px] text-textMuted uppercase font-bold tracking-tighter">Mastery</div>
-                        </div>
+                    <div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div class="h-full bg-accent w-[85%]"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Champion 3: Ornn -->
-            <div class="champion-card p-10 glass-effect border border-white/5 group relative overflow-hidden">
-                <div class="relative z-10 space-y-8">
-                    <div class="flex justify-between items-center">
-                        <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
-                            <i data-lucide="shield" class="w-8 h-8"></i>
-                        </div>
-                        <div class="text-right">
-                            <div class="text-[10px] text-textMuted font-bold uppercase tracking-widest">Win Rate</div>
-                            <div class="text-2xl font-black text-win">62%</div>
-                        </div>
+            <div class="p-8 glass-effect border border-white/5 rounded-2xl flex items-center gap-6 group hover:border-accent/30 transition-all cursor-pointer">
+                <img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/champion/Camille.png" class="w-16 h-16 rounded-xl border border-white/10">
+                <div class="flex-1">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-lg font-black uppercase">Camille</span>
+                        <span class="text-[10px] font-bold text-win">Tier S</span>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-black uppercase tracking-tighter mb-2">Ornn <span class="text-xs font-mono font-normal text-textMuted ml-2">山隐之焰</span></h3>
-                        <p class="text-xs text-textMuted leading-relaxed">
-                            团队的基石。在抗压对线中寻求经济领先，通过打铁升级装备为团队提供后期保障。完美的开团与反手控制。
-                        </p>
+                    <div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div class="h-full bg-accent w-[78%]"></div>
                     </div>
-                    <div class="champion-stats flex justify-between pt-6 border-t border-white/5">
-                        <div class="text-center">
-                            <div class="text-sm font-black">98</div>
-                            <div class="text-[9px] text-textMuted uppercase font-bold tracking-tighter">Played</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-sm font-black">3.2</div>
-                            <div class="text-[9px] text-textMuted uppercase font-bold tracking-tighter">KDA</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-sm font-black">Immovable</div>
-                            <div class="text-[9px] text-textMuted uppercase font-bold tracking-tighter">Mastery</div>
-                        </div>
+                </div>
+            </div>
+
+            <div class="p-8 glass-effect border border-white/5 rounded-2xl flex items-center gap-6 group hover:border-accent/30 transition-all cursor-pointer">
+                <img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/champion/Ornn.png" class="w-16 h-16 rounded-xl border border-white/10">
+                <div class="flex-1">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-lg font-black uppercase">Ornn</span>
+                        <span class="text-[10px] font-bold text-textMuted">Tier 1</span>
+                    </div>
+                    <div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div class="h-full bg-accent w-[62%]"></div>
                     </div>
                 </div>
             </div>
